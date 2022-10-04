@@ -1,0 +1,242 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.github.docker-java</groupId>
+		<artifactId>docker-java-parent</artifactId>
+		<version>0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<properties>
+		<osgi.test.verion>1.0.1</osgi.test.verion>
+		<junit-jupiter.version>5.8.2</junit-jupiter.version>
+		<junit-platform.version>1.8.2</junit-platform.version>
+	</properties>
+
+	<artifactId>docker-java-test-osgi</artifactId>
+	<packaging>jar</packaging>
+
+	<name>docker-java-test-osgi</name>
+	<url>https://github.com/docker-java/docker-java</url>
+	<description>Java OSGi Integration-Tests for Docker</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.7.36</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.framework</artifactId>
+			<version>7.0.3</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.apache.felix.scr</artifactId>
+			<version>2.1.30</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>org.apache.felix</groupId>
+		    <artifactId>org.apache.felix.configadmin</artifactId>
+		    <version>1.9.22</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit-jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-commons</artifactId>
+			<version>${junit-platform.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-params</artifactId>
+			<version>${junit-jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit-jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-engine</artifactId>
+			<version>${junit-platform.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<version>${junit-platform.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.servicemix.bundles</groupId>
+			<artifactId>org.apache.servicemix.bundles.junit</artifactId>
+			<version>4.13.2_1</version>
+			<scope>test</scope>
+		</dependency>
+			
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.test.common</artifactId>
+			<version>${osgi.test.verion}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.test.assertj.framework</artifactId>
+			<version>${osgi.test.verion}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.test.assertj.promise</artifactId>
+			<version>${osgi.test.verion}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.test.junit5</artifactId>
+			<version>${osgi.test.verion}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.test.junit5.cm</artifactId>
+			<version>${osgi.test.verion}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>docker-java-api</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>docker-java-core</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>docker-java-transport</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>docker-java-transport-zerodep</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>net.java.dev.jna</groupId>
+			<artifactId>jna</artifactId>
+			<version>5.8.0</version>
+			<scope>test</scope>
+		</dependency>
+
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>biz.aQute.bnd</groupId>
+				<artifactId>bnd-maven-plugin</artifactId>
+				<configuration>
+					<bnd><![CDATA[
+					Bundle-Name: ${project.name}
+					Bundle-SymbolicName: com.github.${project.name}
+					Export-Package: \
+						com.github.dockerjava.test.osgi.*
+					]]></bnd>
+				</configuration>
+			</plugin>
+			<plugin>
+					<groupId>biz.aQute.bnd</groupId>
+					<artifactId>bnd-resolver-maven-plugin</artifactId>
+					<version>${bnd.version}</version>
+					<executions>
+						<!-- Integration Test Configuration -->
+						<execution>
+							<id>resolve-test</id>
+							<phase>pre-integration-test</phase>
+							<goals>
+								<goal>resolve</goal>
+							</goals>
+							<configuration>
+								<bndruns>
+									<include>test*.bndrun</include>
+								</bndruns>
+								<bundles>
+									<bundle>${project.build.directory}/${project.build.finalName}-tests.jar</bundle>
+								</bundles>
+								<failOnChanges>false</failOnChanges>
+								<includeDependencyManagement>true</includeDependencyManagement>
+								<reportOptional>false</reportOptional>
+								<scopes>
+									<scope>compile</scope>
+									<scope>runtime</scope>
+									<scope>test</scope>
+								</scopes>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>biz.aQute.bnd</groupId>
+					<artifactId>bnd-testing-maven-plugin</artifactId>
+					<version>${bnd.version}</version>
+					<executions>
+						<!-- OSGi integration tests execution -->
+						<execution>
+							<id>testing</id>
+							<goals>
+								<goal>testing</goal>
+							</goals>
+							<configuration>
+								<bndruns>
+									<include>test*.bndrun</include>
+								</bndruns>
+								<bundles>
+									<bundle>${project.build.directory}/${project.build.finalName}-tests.jar</bundle>
+								</bundles>
+								<failOnChanges>false</failOnChanges>
+								<includeDependencyManagement>true</includeDependencyManagement>
+								<resolve>false</resolve>
+								<scopes>
+									<scope>compile</scope>
+									<scope>runtime</scope>
+									<scope>test</scope>
+								</scopes>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+		</plugins>
+	</build>
+</project>
